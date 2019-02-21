@@ -52,7 +52,7 @@ public class OpenSourceReader {
 				if (line.startsWith("**") || line.endsWith("**")) {
 					String name = line.split(Pattern.quote("["))[1].split(" | ")[0];
 					String lisence = line.split(Pattern.quote("]"))[0].split(Pattern.quote(" | "))[1];
-					String lUrl = line.split(Pattern.quote("("))[1].split(Pattern.quote(")"))[0];
+					String lUrl = line.split(Pattern.quote("]("))[1].split(Pattern.quote(")**"))[0];
 
 					this.items.add(new Item(name, lisence, lUrl));
 				}
