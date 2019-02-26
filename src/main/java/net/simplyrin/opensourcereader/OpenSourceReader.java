@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import javax.net.ssl.HttpsURLConnection;
+
 /**
  * Created by SimplyRin on 2019/02/20.
  *
@@ -44,7 +46,10 @@ public class OpenSourceReader {
 	public void check() {
 		try {
 			URL url = new URL("https://raw.githubusercontent.com/" + this.author + "/" + this.repositoryName + "/master/README.md");
-			URLConnection connection = url.openConnection(); // HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+			HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+			connection.addRequestProperty("User-Agent", "Mozilla/5.0");
+			connection.setReadTimeout(5000);
+			connection.setConnectTimeout(5000);
 			Scanner scanner = new Scanner(connection.getInputStream());
 
 			while (scanner.hasNextLine()) {
